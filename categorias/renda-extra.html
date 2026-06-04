@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rota iniciante | Nexus</title>
+
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+
+  <body>
+    <div class="content-page">
+      <a href="../index.html" class="back-btn">← Voltar ao mapa</a>
+
+<div class="beginner-card">
+
+  <div class="beginner-badge">
+    🚀 Mapa do Iniciante
+  </div>
+
+  <h2>Seus Primeiros Passos</h2>
+
+  <p>
+    Um guia simples para sair do zero, evitar erros comuns e encontrar o melhor caminho para gerar renda.
+  </p>
+
+  <div class="beginner-progress">
+    <span>7 etapas</span>
+  </div>
+
+</div>
+
+  <div class="nexus-map-list">
+    <div class="nexus-map-step"><b>01</b><h3>Escolher</h3><p>Escolha apenas uma oportunidade simples.</p></div>
+    <div class="nexus-map-step"><b>02</b><h3>Aprender</h3><p>Aprenda o básico para começar.</p></div>
+    <div class="nexus-map-step"><b>03</b><h3>Testar</h3><p>Comece pequeno e valide a ideia.</p></div>
+    <div class="nexus-map-step"><b>04</b><h3>Vender</h3><p>Faça as primeiras vendas.</p></div>
+    <div class="nexus-map-step"><b>05</b><h3>Reinvestir</h3><p>Use o lucro para melhorar.</p></div>
+    <div class="nexus-map-step"><b>06</b><h3>Consistência</h3><p>Divulgue todos os dias.</p></div>
+    <div class="nexus-map-step"><b>07</b><h3>Escalar</h3><p>Aumente volume, preço e estrutura.</p></div>
+  </div>
+</section>    </div>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const cards = document.querySelectorAll(".strategy-card, .idea-card");
+
+    cards.forEach(function (card) {
+      const title = card.querySelector("h2");
+      if (!title) return;
+
+      const button = document.createElement("button");
+     button.className = "ai-plan-btn teste123";
+      button.textContent = "🤖 Gerar Plano de Ação";
+
+      button.addEventListener("click", function () {
+        const opportunity = title.innerText.replace(/^\d+\.\s*/, "");
+
+        const prompt =
+          "Quero aprender sobre " + opportunity + " do zero.\n\n" +
+          "Crie um plano completo para iniciante contendo:\n\n" +
+          "1. O que é " + opportunity + "\n" +
+          "2. Como funciona na prática\n" +
+          "3. O que preciso aprender primeiro\n" +
+          "4. Ferramentas necessárias\n" +
+          "5. Como conseguir os primeiros clientes ou vendas\n" +
+          "6. Quanto posso cobrar ou ganhar\n" +
+          "7. O que pesquisar no YouTube\n" +
+          "8. Erros que devo evitar\n" +
+          "9. Plano de ação para os próximos 7 dias";
+
+        const box = document.createElement("div");
+        box.className = "prompt-modal";
+        box.innerHTML = `
+          <div class="prompt-modal-card">
+            <h2>Plano de ação gerado</h2>
+            <p>Copie o prompt abaixo e cole no ChatGPT, Gemini ou Claude.</p>
+            <textarea readonly>${prompt}</textarea>
+            <button onclick="this.closest('.prompt-modal').remove()">Fechar</button>
+          </div>
+        `;
+
+        document.body.appendChild(box);
+      });
+
+      card.appendChild(button);
+    });
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase.js"></script>
+<script src="../js/protect.js"></script>
+  </body>
+</html>

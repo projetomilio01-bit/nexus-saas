@@ -1,0 +1,351 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+/* ── TOKENS ─────────────────────────────────────────── */
+:root{
+  --bg:#0b0f16;
+  --bg2:#111822;
+  --bg3:#141d28;
+  --b1:rgba(55,138,221,0.18);
+  --b2:rgba(55,138,221,0.38);
+  --blue:#378ADD;
+  --blue-l:#85B7EB;
+  --purple:#7F77DD;
+  --purple-l:#AFA9EC;
+  --cyan:#1D9E75;
+  --cyan-l:#5DCAA5;
+  --txt:#e8f0ff;
+  --txt2:rgba(180,200,230,0.58);
+  --txt3:rgba(140,165,200,0.4);
+}
+
+/* ── SHARED ──────────────────────────────────────────── */
+.wrap{background:var(--bg);border-radius:18px;padding:36px 18px 52px;position:relative;overflow:hidden;font-family:system-ui,sans-serif}
+.halo-a{position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:400px;height:240px;background:radial-gradient(ellipse,rgba(55,138,221,0.07) 0%,transparent 70%);pointer-events:none}
+.halo-b{position:absolute;bottom:-60px;left:50%;transform:translateX(-50%);width:340px;height:200px;background:radial-gradient(ellipse,rgba(29,158,117,0.07) 0%,transparent 70%);pointer-events:none}
+
+.header{text-align:center;margin-bottom:32px;position:relative;z-index:2}
+.badge{display:inline-flex;align-items:center;gap:6px;background:rgba(55,138,221,0.1);border:1px solid rgba(55,138,221,0.25);color:var(--blue-l);font-size:11px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:18px}
+.h1{font-size:clamp(16px,3.8vw,22px);font-weight:500;color:var(--txt);line-height:1.45;margin-bottom:10px}
+.h1 em{font-style:normal;background:linear-gradient(100deg,var(--blue-l) 0%,var(--purple-l) 50%,var(--cyan-l) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{font-size:13px;color:var(--txt2);line-height:1.7;max-width:480px;margin:0 auto}
+
+/* ════════════════════════════════════════════════════
+   MOBILE LAYOUT  (<= 640px)
+════════════════════════════════════════════════════ */
+.mobile-journey{display:none;flex-direction:column;align-items:stretch;position:relative;z-index:2;max-width:440px;margin:0 auto}
+
+/* "Você está aqui" anchor */
+.gps-anchor{display:flex;align-items:center;gap:10px;background:rgba(55,138,221,0.1);border:1px solid rgba(55,138,221,0.35);border-radius:12px;padding:12px 16px;margin-bottom:0}
+.anchor-dot{width:10px;height:10px;border-radius:50%;background:var(--blue);flex-shrink:0;box-shadow:0 0 0 4px rgba(55,138,221,0.2)}
+.anchor-label{font-size:11px;font-weight:500;letter-spacing:.09em;text-transform:uppercase;color:var(--blue-l)}
+
+/* Point A card */
+.point-a-card{background:rgba(55,138,221,0.07);border:1.5px solid rgba(55,138,221,0.4);border-radius:14px;padding:20px 18px;margin-top:12px}
+.pa-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.pa-icon{width:40px;height:40px;border-radius:10px;background:rgba(55,138,221,0.15);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.pa-tag{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--blue-l);opacity:.7;margin-bottom:3px}
+.pa-name{font-size:16px;font-weight:500;color:var(--txt)}
+.pa-desc{font-size:13px;color:var(--txt2);line-height:1.6}
+
+/* Route line + steps */
+.route-track{display:flex;flex-direction:column;align-items:stretch;padding-left:20px;margin-top:4px}
+
+/* connector segment between cards */
+.seg{display:flex;align-items:flex-start;gap:0;min-height:32px}
+.seg-line-col{display:flex;flex-direction:column;align-items:center;width:22px;flex-shrink:0}
+.seg-line{width:2px;flex:1;background:linear-gradient(180deg,rgba(55,138,221,0.45),rgba(127,119,221,0.45));border-radius:2px;min-height:24px}
+.seg-arrow{color:rgba(55,138,221,0.5);font-size:13px;line-height:1}
+
+/* step card */
+.step-row{display:flex;align-items:flex-start;gap:0}
+.step-dot-col{display:flex;flex-direction:column;align-items:center;width:22px;flex-shrink:0;padding-top:16px}
+.step-dot{width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--purple);flex-shrink:0;transition:border-color .2s,transform .2s}
+.step-dot.cyan{border-color:var(--cyan)}
+.step-card-m{background:var(--bg2);border:1px solid var(--b1);border-radius:13px;padding:16px 15px;flex:1;margin-left:10px;margin-bottom:0;transition:border-color .2s,background .2s;cursor:pointer}
+.step-card-m:active{border-color:rgba(127,119,221,0.5);background:var(--bg3)}
+.step-top{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.step-icon-m{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.step-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--txt3);margin-bottom:2px}
+.step-name-m{font-size:14px;font-weight:500;color:var(--txt);line-height:1.3}
+.step-desc-m{font-size:12.5px;color:var(--txt2);line-height:1.6}
+
+/* Final line to Point B */
+.final-seg{padding-left:20px}
+.final-line-col{display:flex;flex-direction:column;align-items:center;width:22px}
+.final-line{width:2px;height:36px;background:linear-gradient(180deg,rgba(127,119,221,0.45),rgba(29,158,117,0.55));border-radius:2px}
+
+/* Point B */
+.point-b-card{background:rgba(29,158,117,0.08);border:1.5px solid rgba(29,158,117,0.4);border-radius:14px;padding:20px 18px;margin-top:12px}
+.pb-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.pb-icon{width:40px;height:40px;border-radius:10px;background:rgba(29,158,117,0.15);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.pb-tag{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--cyan-l);opacity:.7;margin-bottom:3px}
+.pb-name{font-size:16px;font-weight:500;color:var(--txt)}
+.pb-desc{font-size:13px;color:var(--txt2);line-height:1.6}
+
+/* ════════════════════════════════════════════════════
+   DESKTOP LAYOUT  (>640px)
+════════════════════════════════════════════════════ */
+.desktop-journey{display:none;position:relative;z-index:2}
+.road-svg{display:block;width:100%;overflow:visible}
+.road-shadow{fill:none;stroke:rgba(55,138,221,0.08);stroke-width:28;stroke-linecap:round}
+.road-base{fill:none;stroke:#141c28;stroke-width:22;stroke-linecap:round}
+.road-edge{fill:none;stroke:rgba(55,138,221,0.22);stroke-width:22;stroke-linecap:round;stroke-dasharray:4000;stroke-dashoffset:4000}
+.road-glow{fill:none;stroke:rgba(100,180,255,0.1);stroke-width:32;stroke-linecap:round}
+.road-center{fill:none;stroke:rgba(255,255,255,0.06);stroke-width:1.5;stroke-linecap:round;stroke-dasharray:10 14}
+.d-card{background:var(--bg2);border:1px solid var(--b1);border-radius:13px;padding:13px 15px;width:216px;transition:border-color .2s,transform .2s;position:absolute;cursor:pointer}
+.d-card:hover{border-color:var(--b2);transform:translateY(-3px)}
+.d-card.c-start{border-color:rgba(55,138,221,0.42);background:rgba(55,138,221,0.06)}
+.d-card.c-end{border-color:rgba(29,158,117,0.42);background:rgba(29,158,117,0.06)}
+.d-tag{font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:500;margin-bottom:2px}
+.d-label{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--txt3);margin-bottom:2px}
+.d-name{font-size:14px;font-weight:500;color:var(--txt);margin-bottom:4px;line-height:1.3}
+.d-desc{font-size:12px;color:var(--txt2);line-height:1.55}
+.conn-svg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+
+@keyframes draw-road{from{stroke-dashoffset:4000}to{stroke-dashoffset:0}}
+@keyframes dash-flow{to{stroke-dashoffset:-40}}
+@keyframes pop-in{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+@keyframes card-in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse-r{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.4);opacity:0}}
+@keyframes float-b{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes line-grow{from{height:0}to{height:var(--h,100%)}}
+
+/* breakpoints */
+@media(max-width:640px){
+  .mobile-journey{display:flex}
+  .desktop-journey{display:none!important}
+}
+@media(min-width:641px){
+  .mobile-journey{display:none!important}
+  .desktop-journey{display:block}
+}
+</style>
+
+<div class="wrap">
+  <div class="halo-a"></div>
+  <div class="halo-b"></div>
+
+  <div class="header">
+    <div class="badge" style="animation:float-b 3.5s ease-in-out infinite">
+      <i class="ti ti-map-pin" aria-hidden="true"></i>Mapa do Iniciante™
+    </div>
+    <p class="h1">Você não precisa saber tudo.<br><em>Só o próximo passo.</em></p>
+    <p class="sub">A maioria das pessoas fica travada porque tenta fazer tudo ao mesmo tempo. Siga esta rota.</p>
+  </div>
+
+  <!-- ══════════ MOBILE ══════════ -->
+  <div class="mobile-journey" id="mob">
+
+    <div class="gps-anchor">
+      <div class="anchor-dot"></div>
+      <span class="anchor-label">📍 Você está aqui</span>
+    </div>
+
+    <div class="point-a-card" style="animation:card-in .4s ease .1s both">
+      <div class="pa-top">
+        <div class="pa-icon">😕</div>
+        <div>
+          <div class="pa-tag">Ponto A · Início da rota</div>
+          <div class="pa-name">Perdido</div>
+        </div>
+      </div>
+      <p class="pa-desc">Confuso com tantas opções. Não sabe qual oportunidade escolher nem por onde começar.</p>
+    </div>
+
+    <div id="mob-steps"></div>
+
+    <div class="final-seg">
+      <div class="final-line-col"><div class="final-line"></div></div>
+    </div>
+
+    <div class="point-b-card" style="animation:card-in .4s ease 2s both">
+      <div class="pb-top">
+        <div class="pb-icon">🏆</div>
+        <div>
+          <div class="pb-tag">Ponto B · Destino final</div>
+          <div class="pb-name">Nova fonte de renda</div>
+        </div>
+      </div>
+      <p class="pb-desc">Construída com consistência, execução e tempo. Você chegou.</p>
+    </div>
+
+  </div>
+
+  <!-- ══════════ DESKTOP ══════════ -->
+  <div class="desktop-journey" id="desk">
+    <svg id="road" class="road-svg" viewBox="0 0 640 1080" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <linearGradient id="edgeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%"  stop-color="#378ADD" stop-opacity=".7"/>
+          <stop offset="45%" stop-color="#7F77DD" stop-opacity=".6"/>
+          <stop offset="100%" stop-color="#1D9E75" stop-opacity=".8"/>
+        </linearGradient>
+        <linearGradient id="pinB" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#378ADD"/><stop offset="100%" stop-color="#5DCAA5"/>
+        </linearGradient>
+        <linearGradient id="pinE" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#1D9E75"/><stop offset="100%" stop-color="#378ADD"/>
+        </linearGradient>
+      </defs>
+      <path class="road-shadow" d="M320 60 C320 110,120 130,120 190 C120 250,320 270,320 330 C320 390,120 410,120 470 C120 530,320 550,320 610 C320 670,120 690,120 750 C120 810,320 830,320 890 C320 940,200 960,200 1010"/>
+      <path class="road-base"   d="M320 60 C320 110,120 130,120 190 C120 250,320 270,320 330 C320 390,120 410,120 470 C120 530,320 550,320 610 C320 670,120 690,120 750 C120 810,320 830,320 890 C320 940,200 960,200 1010"/>
+      <path class="road-glow"   d="M320 60 C320 110,120 130,120 190 C120 250,320 270,320 330 C320 390,120 410,120 470 C120 530,320 550,320 610 C320 670,120 690,120 750 C120 810,320 830,320 890 C320 940,200 960,200 1010"/>
+      <path class="road-edge" stroke="url(#edgeGrad)" style="animation:draw-road 2.2s cubic-bezier(.4,0,.2,1) .2s forwards"
+            d="M320 60 C320 110,120 130,120 190 C120 250,320 270,320 330 C320 390,120 410,120 470 C120 530,320 550,320 610 C320 670,120 690,120 750 C120 810,320 830,320 890 C320 940,200 960,200 1010"/>
+      <path class="road-center" style="animation:dash-flow 1.2s linear infinite"
+            d="M320 60 C320 110,120 130,120 190 C120 250,320 270,320 330 C320 390,120 410,120 470 C120 530,320 550,320 610 C320 670,120 690,120 750 C120 810,320 830,320 890 C320 940,200 960,200 1010"/>
+      <g id="d-nodes"></g>
+    </svg>
+    <div id="d-cards" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none"></div>
+  </div>
+</div>
+
+<script>
+const STEPS = [
+  {label:'Passo 1',name:'Escolha uma direção',desc:'Escolha UMA oportunidade. Não tente fazer tudo.',icon:'🧭',tag:'Próximo passo',tagColor:'#AFA9EC',iconBg:'rgba(127,119,221,0.15)',side:'left',t:.13,delay:.65},
+  {label:'Passo 2',name:'Entenda o básico',desc:'Aprenda só o necessário para começar a agir.',icon:'📚',tag:'Siga em frente',tagColor:'#AFA9EC',iconBg:'rgba(127,119,221,0.15)',side:'right',t:.26,delay:.8},
+  {label:'Passo 3',name:'Entre em campo',desc:'Faça sua primeira tentativa. Pare de consumir, comece a executar.',icon:'🛠',tag:'Ação agora',tagColor:'#AFA9EC',iconBg:'rgba(127,119,221,0.15)',side:'left',t:.39,delay:.95},
+  {label:'Passo 4',name:'Valide',desc:'Consiga seu primeiro cliente, venda ou resultado real.',icon:'💰',tag:'Marco importante',tagColor:'#5DCAA5',iconBg:'rgba(29,158,117,0.15)',side:'right',t:.52,delay:1.1},
+  {label:'Passo 5',name:'Melhore',desc:'Ajuste erros e refine sua execução.',icon:'♻',tag:'Iteração',tagColor:'#AFA9EC',iconBg:'rgba(29,158,117,0.15)',side:'left',t:.62,delay:1.25},
+  {label:'Passo 6',name:'Repita',desc:'A consistência cria resultados. Execute novamente.',icon:'🔥',tag:'Consistência',tagColor:'#AFA9EC',iconBg:'rgba(127,119,221,0.15)',side:'right',t:.72,delay:1.4},
+  {label:'Passo 7',name:'Escale',desc:'Aumente volume, preço e estrutura do que já funciona.',icon:'🚀',tag:'Crescimento',tagColor:'#AFA9EC',iconBg:'rgba(127,119,221,0.15)',side:'left',t:.83,delay:1.55},
+];
+
+/* ── MOBILE BUILD ───────────────────────────────── */
+const mobSteps = document.getElementById('mob-steps');
+STEPS.forEach((s,i)=>{
+  const del = .3 + i*.18;
+  const isCyan = s.tagColor==='#5DCAA5';
+
+  mobSteps.innerHTML += `
+    <div style="padding-left:20px;animation:card-in .4s ease ${del+.05}s both">
+      <div style="display:flex;flex-direction:column;align-items:center;width:22px;float:left;margin-right:0">
+        <div style="width:2px;height:20px;background:linear-gradient(180deg,rgba(55,138,221,0.4),rgba(127,119,221,0.4));border-radius:2px"></div>
+      </div>
+    </div>
+    <div class="step-row" style="padding-left:20px;animation:card-in .4s ease ${del}s both">
+      <div class="step-dot-col">
+        <div class="step-dot${isCyan?' cyan':''}" style="animation:pop-in .35s ease ${del+.1}s both"></div>
+        <div style="width:2px;flex:1;min-height:20px;background:linear-gradient(180deg,rgba(127,119,221,0.35),rgba(55,138,221,0.25));border-radius:2px;margin-top:4px"></div>
+      </div>
+      <div class="step-card-m" style="margin-bottom:0">
+        <div class="step-top">
+          <div class="step-icon-m" style="background:${s.iconBg}">${s.icon}</div>
+          <div>
+            <div class="step-lbl">${s.label}</div>
+            <div class="step-name-m">${s.name}</div>
+          </div>
+        </div>
+        <p class="step-desc-m">${s.desc}</p>
+      </div>
+    </div>
+  `;
+});
+
+/* ── DESKTOP BUILD ─────────────────────────────── */
+const ALL_STOPS = [
+  {label:'Ponto A',name:'Perdido',desc:'Confuso com tantas opções. Não sabe por onde começar.',icon:'📍',tag:'Você está aqui',tagColor:'#85B7EB',side:'right',t:0,type:'start',delay:.5},
+  ...STEPS.map(s=>({...s,type:'mid'})),
+  {label:'Ponto B',name:'Nova fonte de renda',desc:'Construída com consistência, execução e tempo.',icon:'🏆',tag:'Destino final',tagColor:'#5DCAA5',side:'right',t:1,type:'end',delay:1.75},
+];
+
+const segs=[
+  [[320,60],[320,110],[120,130],[120,190]],
+  [[120,190],[120,250],[320,270],[320,330]],
+  [[320,330],[320,390],[120,410],[120,470]],
+  [[120,470],[120,530],[320,550],[320,610]],
+  [[320,610],[320,670],[120,690],[120,750]],
+  [[120,750],[120,810],[320,830],[320,890]],
+  [[320,890],[320,940],[200,960],[200,1010]],
+];
+
+function bez(t,a,b,c,d){const m=1-t;return m*m*m*a+3*m*m*t*b+3*m*t*t*c+t*t*t*d}
+function pt(f){const n=segs.length,sc=f*n,idx=Math.min(Math.floor(sc),n-1),lt=sc-idx,s=segs[idx];
+  return{x:bez(lt,s[0][0],s[1][0],s[2][0],s[3][0]),y:bez(lt,s[0][1],s[1][1],s[2][1],s[3][1])}}
+
+const svgEl=document.getElementById('road');
+const nodesLayer=document.getElementById('d-nodes');
+const cardsLayer=document.getElementById('d-cards');
+const SVG_W=640,SVG_H=1080,CW=216,CH=88;
+
+ALL_STOPS.forEach(s=>{
+  const p=pt(s.t);
+  const isS=s.type==='start',isE=s.type==='end';
+  const pr=isS||isE?12:8;
+  const rc=isE?'#1D9E75':'#378ADD';
+
+  const g=document.createElementNS('http://www.w3.org/2000/svg','g');
+  g.setAttribute('class','node-group');
+  g.style.animation=`pop-in .4s ease ${s.delay+.1}s both`;
+
+  const ring=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  ring.setAttribute('cx',p.x);ring.setAttribute('cy',p.y);ring.setAttribute('r',pr+4);
+  ring.setAttribute('fill','none');ring.setAttribute('stroke',rc);ring.setAttribute('stroke-width','1.5');
+  ring.setAttribute('opacity','.3');
+  ring.style.cssText=`transform-origin:${p.x}px ${p.y}px;animation:pulse-r 2.2s ease-out ${s.delay}s infinite`;
+
+  const oc=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  oc.setAttribute('cx',p.x);oc.setAttribute('cy',p.y);oc.setAttribute('r',pr+2);
+  oc.setAttribute('fill','#0b0f16');oc.setAttribute('stroke',rc);oc.setAttribute('stroke-width','1.5');
+  oc.setAttribute('class','pin-outer');
+
+  const ic=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  ic.setAttribute('cx',p.x);ic.setAttribute('cy',p.y);ic.setAttribute('r',pr-1);
+  ic.setAttribute('fill',isE?'url(#pinE)':isS?'url(#pinB)':'#7F77DD');
+
+  g.appendChild(ring);g.appendChild(oc);g.appendChild(ic);
+
+  if(isS){
+    const lbl=document.createElementNS('http://www.w3.org/2000/svg','text');
+    lbl.setAttribute('x',p.x);lbl.setAttribute('y',p.y-pr-10);
+    lbl.setAttribute('text-anchor','middle');lbl.setAttribute('fill','#85B7EB');
+    lbl.setAttribute('font-size','11');lbl.setAttribute('font-family','system-ui,sans-serif');
+    lbl.setAttribute('font-weight','500');lbl.setAttribute('letter-spacing','.09em');
+    lbl.textContent='VOCÊ ESTÁ AQUI';g.appendChild(lbl);
+  }
+  nodesLayer.appendChild(g);
+
+  const card=document.createElement('div');
+  card.className='d-card '+(isS?'c-start':isE?'c-end':'');
+  card.style.animation=`card-in .45s ease ${s.delay}s both`;
+
+  card.innerHTML=`
+    <div class="d-tag" style="color:${s.tagColor}">${s.tag}</div>
+    <div class="d-label">${s.label}</div>
+    <div class="d-name">${s.name}</div>
+    <p class="d-desc">${s.desc}</p>
+  `;
+  card.style.pointerEvents='auto';
+  cardsLayer.appendChild(card);
+
+  function pos(){
+    const sr=svgEl.getBoundingClientRect(),cr=cardsLayer.getBoundingClientRect();
+    const sx=sr.width/SVG_W,sy=sr.height/SVG_H;
+    const px=(p.x*sx)+(sr.left-cr.left),py=(p.y*sy)+(sr.top-cr.top);
+    const GAP=20+pr,isR=s.side==='right';
+    const ch=card.offsetHeight||CH;
+    let left=isR?px+GAP:px-GAP-CW,top=py-ch/2;
+    const cw=cr.width;
+    if(left+CW>cw-4)left=cw-CW-4;
+    if(left<4)left=4;if(top<2)top=2;
+    card.style.left=left+'px';card.style.top=top+'px';card.style.width=CW+'px';
+
+    const ccY=top+(card.offsetHeight||CH)/2;
+    const lx1=isR?px+pr+4:px-pr-4,lx2=isR?left:left+CW;
+
+    if(!card._sv){
+      const sv=document.createElementNS('http://www.w3.org/2000/svg','svg');
+      sv.style.cssText='position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;overflow:visible';
+      const ln=document.createElementNS('http://www.w3.org/2000/svg','line');
+      ln.setAttribute('stroke','rgba(55,138,221,0.32)');ln.setAttribute('stroke-width','1');
+      ln.setAttribute('stroke-dasharray','3 4');ln.setAttribute('fill','none');
+      sv.appendChild(ln);cardsLayer.appendChild(sv);card._sv=sv;card._ln=ln;
+    }
+    card._ln.setAttribute('x1',lx1);card._ln.setAttribute('y1',py);
+    card._ln.setAttribute('x2',lx2);card._ln.setAttribute('y2',ccY);
+  }
+  setTimeout(pos,60);window.addEventListener('resize',pos);
+});
+</script>

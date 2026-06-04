@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz | Nexus</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+
+  <body>
+    <main class="quiz-wrapper">
+      <section class="quiz-card" id="quizScreen" style="display:block;">
+        <span class="quiz-tag">RADAR DE OPORTUNIDADES™</span>
+
+        <p class="quiz-subtitle">Leva menos de 2 minutos para concluir.</p>
+
+        <div class="quiz-progress-top">
+          <span id="questionCounter">Pergunta 1 de 5</span>
+          <strong id="questionPercent">20%</strong>
+        </div>
+
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="quizProgressFill"></div>
+        </div>
+
+        <h2 id="questionTitle">Qual sua situação hoje?</h2>
+
+        <div class="quiz-options" id="optionsArea">
+          <button type="button" onclick="nextQuizQuestion()">
+            Trabalho CLT e quero renda extra
+          </button>
+
+          <button type="button" onclick="nextQuizQuestion()">
+            Estou buscando uma nova fonte de renda
+          </button>
+
+          <button type="button" onclick="nextQuizQuestion()">
+            Quero trabalhar usando celular e internet
+          </button>
+
+          <button type="button" onclick="nextQuizQuestion()">
+            Quero mais liberdade financeira
+          </button>
+        </div>
+      </section>
+
+      <section class="quiz-loading" id="loadingScreen">
+        <span class="quiz-tag">ANÁLISE EM ANDAMENTO</span>
+
+        <h2>Analisando seu perfil...</h2>
+
+        <p id="loadingText">Identificando oportunidades compatíveis...</p>
+
+        <div class="fake-progress-bar">
+          <div class="fake-progress-fill" id="fakeProgressFill"></div>
+        </div>
+
+        <strong id="fakeProgressPercent">17%</strong>
+      </section>
+
+      <section class="quiz-result" id="resultScreen">
+        <div class="result-box">
+          <span class="quiz-tag">DIAGNÓSTICO CONCLUÍDO</span>
+
+          <h2>
+            🎯 Encontramos
+            <strong id="resultNumber">38</strong>
+            oportunidades compatíveis com sua realidade atual
+          </h2>
+
+          <p>Algumas delas podem ajudar você a:</p>
+
+          <ul>
+            <li>✓ Fazer R$300 extras por semana</li>
+            <li>✓ Criar uma segunda fonte de renda</li>
+            <li>✓ Aumentar sua liberdade financeira</li>
+            <li>✓ Trabalhar usando apenas celular e internet</li>
+          </ul>
+
+          <div class="result-divider"></div>
+
+          <p>Ao desbloquear agora você recebe:</p>
+
+          <ul>
+            <li>✓ 50+ oportunidades organizadas</li>
+            <li>✓ Mapa do Iniciante</li>
+            <li>✓ Oportunidades Digitais</li>
+            <li>✓ Oportunidades Escaláveis</li>
+            <li>✓ Biblioteca Premium</li>
+          </ul>
+
+          <div class="price-box">
+            <span>Acesso por menos de R$2 por dia Pagamento único de </span>
+            <strong>R$47,00</strong>
+          </div>
+
+          <a href="../index.html" class="quiz-main-btn">
+            🚀 QUERO DESBLOQUEAR POR R$47
+          </a>
+
+          <div class="guarantee-box">
+            <strong>🛡️ Garantia incondicional de 7 dias</strong>
+            <p>Você não tem nada a perder.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const quizQuestions = [
+        {
+          question: "Qual sua situação hoje?",
+          options: [
+            "Trabalho CLT e quero renda extra",
+            "Estou buscando uma nova fonte de renda",
+            "Quero trabalhar usando celular e internet",
+            "Quero mais liberdade financeira",
+          ],
+        },
+        {
+          question: "Quanto tempo você consegue dedicar por dia?",
+          options: [
+            "Menos de 1 hora",
+            "Entre 1 e 2 horas",
+            "Entre 2 e 4 horas",
+            "Mais de 4 horas",
+          ],
+        },
+        {
+          question: "Você possui algum dinheiro para começar?",
+          options: [
+            "Quero começar sem investir",
+            "Até R$100",
+            "Entre R$100 e R$500",
+            "Mais de R$500",
+          ],
+        },
+        {
+          question: "Qual dessas frases mais combina com você?",
+          options: [
+            "Prefiro trabalhar usando celular e internet",
+            "Gosto de conversar e ajudar pessoas",
+            "Prefiro algo simples e prático",
+            "Quero construir algo que cresça no futuro",
+          ],
+        },
+        {
+          question: "Qual seu maior desafio hoje?",
+          options: [
+            "Falta de dinheiro",
+            "Falta de direção",
+            "Falta de tempo",
+            "Medo de começar errado",
+          ],
+        },
+      ];
+
+      let quizIndex = 0;
+
+      function startQuiz() {
+        document.getElementById("startScreen").style.display = "none";
+        document.getElementById("quizScreen").style.display = "block";
+        renderQuizQuestion();
+      }
+
+      function renderQuizQuestion() {
+        const current = quizQuestions[quizIndex];
+        const percent = Math.round(
+          ((quizIndex + 1) / quizQuestions.length) * 100,
+        );
+
+        document.getElementById("questionCounter").innerText =
+          "Pergunta " + (quizIndex + 1) + " de " + quizQuestions.length;
+
+        document.getElementById("questionPercent").innerText = percent + "%";
+        document.getElementById("quizProgressFill").style.width = percent + "%";
+        document.getElementById("questionTitle").innerText = current.question;
+
+        const optionsArea = document.getElementById("optionsArea");
+        optionsArea.innerHTML = "";
+
+        current.options.forEach(function (option) {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.innerText = option;
+          btn.addEventListener("click", nextQuizQuestion);
+          optionsArea.appendChild(btn);
+        });
+      }
+
+      function nextQuizQuestion() {
+        quizIndex++;
+
+        if (quizIndex >= quizQuestions.length) {
+          startFakeLoading();
+          return;
+        }
+
+        renderQuizQuestion();
+      }
+
+      function startFakeLoading() {
+        document.getElementById("quizScreen").style.display = "none";
+        document.getElementById("loadingScreen").style.display = "block";
+
+        const steps = [
+          { percent: 17, text: "Identificando oportunidades compatíveis..." },
+          { percent: 46, text: "Analisando seu tempo disponível..." },
+          { percent: 72, text: "Calculando perfil de execução..." },
+          { percent: 93, text: "Preparando seu plano personalizado..." },
+          { percent: 100, text: "Análise concluída com sucesso." },
+        ];
+
+        let stepIndex = 0;
+
+        const interval = setInterval(function () {
+          const step = steps[stepIndex];
+
+          document.getElementById("fakeProgressFill").style.width =
+            step.percent + "%";
+
+          document.getElementById("fakeProgressPercent").innerText =
+            step.percent + "%";
+
+          document.getElementById("loadingText").innerText = step.text;
+
+          stepIndex++;
+
+          if (stepIndex >= steps.length) {
+            clearInterval(interval);
+
+            setTimeout(function () {
+              showQuizResult();
+            }, 700);
+          }
+        }, 900);
+      }
+
+      function showQuizResult() {
+        const number = Math.floor(Math.random() * 9) + 31;
+
+        document.getElementById("loadingScreen").style.display = "none";
+        document.getElementById("resultScreen").style.display = "block";
+        document.getElementById("resultNumber").innerText = number;
+      }
+    </script>
+  </body>
+</html>

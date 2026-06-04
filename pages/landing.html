@@ -1,0 +1,1600 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nexus™ — Radar de Oportunidades</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap");
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #020817;
+        --bg2: #0f172a;
+        --bg3: #0a1020;
+        --blue: #00c8ff;
+        --purple: #7c3aed;
+        --text: #ffffff;
+        --text2: #b8c6dc;
+        --text3: #6b7fa3;
+        --border: rgba(255, 255, 255, 0.08);
+        --card: rgba(255, 255, 255, 0.04);
+        --grad: linear-gradient(135deg, #00c8ff, #7c3aed);
+        --grad-r: linear-gradient(135deg, #7c3aed, #00c8ff);
+        --r: 14px;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ── GLOW BG ── */
+      .glow-layer {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(
+            ellipse 70% 50% at 85% 5%,
+            rgba(124, 58, 237, 0.22),
+            transparent
+          ),
+          radial-gradient(
+            ellipse 60% 40% at 5% 90%,
+            rgba(0, 200, 255, 0.14),
+            transparent
+          );
+      }
+
+      /* ── CONTAINER ── */
+      .wrap {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 0 20px;
+        position: relative;
+        z-index: 1;
+      }
+      .wrap-wide {
+        max-width: 1060px;
+        margin: 0 auto;
+        padding: 0 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ── NAV ── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 16px 0;
+        border-bottom: 1px solid var(--border);
+        background: rgba(2, 8, 23, 0.8);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .nav-logo {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-weight: 800;
+        font-size: 20px;
+        letter-spacing: -0.5px;
+        background: var(--grad);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-decoration: none;
+      }
+      .nav-badge {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        color: var(--text3);
+        text-transform: uppercase;
+        border: 1px solid var(--border);
+        border-radius: 100px;
+        padding: 4px 10px;
+      }
+      .nav-cta {
+        background: var(--grad);
+        color: #fff;
+        border: none;
+        padding: 9px 18px;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.25s;
+        white-space: nowrap;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .nav-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(124, 58, 237, 0.4);
+      }
+
+      /* ── HERO ── */
+      .hero {
+        padding: 140px 0 100px;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid rgba(0, 200, 255, 0.25);
+        background: rgba(0, 200, 255, 0.07);
+        border-radius: 100px;
+        padding: 5px 14px 5px 8px;
+        font-size: 12.5px;
+        color: var(--blue);
+        margin-bottom: 32px;
+        letter-spacing: 0.01em;
+      }
+      .tag-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--blue);
+        box-shadow: 0 0 8px var(--blue);
+        animation: blink 2s ease infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+
+      .hero h1 {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-size: clamp(36px, 7vw, 68px);
+        font-weight: 800;
+        line-height: 1.07;
+        letter-spacing: -1.5px;
+        margin-bottom: 8px;
+      }
+      .hero h1 em {
+        font-style: normal;
+        background: var(--grad);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .hero-sub-head {
+        font-family: "DM Serif Display", serif;
+        font-style: italic;
+        font-size: clamp(22px, 4vw, 36px);
+        color: rgba(255, 255, 255, 0.55);
+        font-weight: 400;
+        line-height: 1.2;
+        margin-bottom: 28px;
+        letter-spacing: -0.3px;
+      }
+      .hero-desc {
+        font-size: 17px;
+        color: var(--text2);
+        font-weight: 300;
+        max-width: 500px;
+        margin: 0 auto 16px;
+        line-height: 1.7;
+      }
+      .hero-pills {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        margin-bottom: 40px;
+      }
+      .hero-pill {
+        font-size: 13px;
+        color: var(--text2);
+        border: 1px solid var(--border);
+        border-radius: 100px;
+        padding: 5px 14px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .hero-pill::before {
+        content: "✓ ";
+        color: var(--blue);
+      }
+
+      /* ── CTA BUTTON ── */
+      .btn-main {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--grad);
+        color: #fff;
+        border: none;
+        padding: 18px 36px;
+        border-radius: 12px;
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: -0.2px;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        box-shadow: 0 0 40px rgba(124, 58, 237, 0.3);
+      }
+      .btn-main:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 48px rgba(124, 58, 237, 0.5);
+      }
+      .btn-main:active {
+        transform: translateY(-1px);
+      }
+
+      .btn-main-outline {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: transparent;
+        color: #fff;
+        border: 1.5px solid rgba(255, 255, 255, 0.2);
+        padding: 18px 36px;
+        border-radius: 12px;
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-size: 17px;
+        font-weight: 700;
+        letter-spacing: -0.2px;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+      }
+      .btn-main-outline:hover {
+        border-color: rgba(255, 255, 255, 0.4);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .hero-note {
+        font-size: 13px;
+        color: rgba(184, 198, 220, 0.4);
+        margin-top: 14px;
+      }
+      .hero-note span {
+        color: rgba(184, 198, 220, 0.7);
+      }
+
+      /* ── SECTION BASE ── */
+      section {
+        position: relative;
+        z-index: 1;
+      }
+      .s-label {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--blue);
+        margin-bottom: 12px;
+      }
+      .s-title {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-size: clamp(28px, 4.5vw, 48px);
+        font-weight: 800;
+        line-height: 1.08;
+        letter-spacing: -1.2px;
+        margin-bottom: 16px;
+      }
+      .s-title em {
+        font-style: normal;
+        background: var(--grad);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .s-sub {
+        font-size: 16px;
+        color: var(--text2);
+        font-weight: 300;
+        line-height: 1.7;
+        max-width: 560px;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .text-center .s-sub {
+        margin: 0 auto;
+      }
+
+      /* ── DIVIDER ── */
+      .divider {
+        height: 1px;
+        background: var(--border);
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ── SECTION: PROBLEMA ── */
+      .problem {
+        padding: 100px 0;
+      }
+      .problem-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-top: 52px;
+      }
+      .p-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 24px 28px;
+        transition:
+          border-color 0.3s,
+          transform 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      .p-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--grad);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .p-card:hover {
+        border-color: rgba(255, 255, 255, 0.14);
+        transform: translateY(-2px);
+      }
+      .p-card:hover::before {
+        opacity: 1;
+      }
+      .p-card-icon {
+        font-size: 28px;
+        margin-bottom: 12px;
+        line-height: 1;
+      }
+      .p-card h4 {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 6px;
+        letter-spacing: -0.2px;
+      }
+      .p-card p {
+        font-size: 14px;
+        color: var(--text2);
+        line-height: 1.6;
+      }
+
+      .prob-statement {
+        background: linear-gradient(
+          135deg,
+          rgba(124, 58, 237, 0.12),
+          rgba(0, 200, 255, 0.06)
+        );
+        border: 1px solid rgba(124, 58, 237, 0.25);
+        border-radius: 18px;
+        padding: 36px;
+        margin-top: 40px;
+        position: relative;
+        overflow: hidden;
+      }
+      .prob-statement::before {
+        content: '"';
+        position: absolute;
+        font-family: "DM Serif Display", serif;
+        font-size: 180px;
+        line-height: 1;
+        color: rgba(124, 58, 237, 0.08);
+        top: -20px;
+        left: 20px;
+        pointer-events: none;
+      }
+      .prob-statement p {
+        font-family: "DM Serif Display", serif;
+        font-style: italic;
+        font-size: clamp(18px, 3vw, 26px);
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.85);
+        position: relative;
+        z-index: 1;
+      }
+      .prob-statement strong {
+        font-style: normal;
+        background: var(--grad);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 400;
+      }
+
+      /* ── SECTION: COMO FUNCIONA ── */
+      .how {
+        padding: 100px 0;
+        background: var(--bg3);
+      }
+      .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        margin-top: 52px;
+        position: relative;
+      }
+      .steps-grid::before {
+        content: "";
+        position: absolute;
+        top: 36px;
+        left: 12.5%;
+        right: 12.5%;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(0, 200, 255, 0.3),
+          rgba(124, 58, 237, 0.3),
+          transparent
+        );
+      }
+      .step-item {
+        text-align: center;
+        padding: 0 16px;
+      }
+      .step-num {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: var(--bg2);
+        position: relative;
+        z-index: 1;
+        transition: all 0.3s;
+      }
+      .step-item:hover .step-num {
+        background: var(--grad);
+        border-color: transparent;
+        box-shadow: 0 0 30px rgba(124, 58, 237, 0.4);
+      }
+      .step-item h4 {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 8px;
+        letter-spacing: -0.2px;
+      }
+      .step-item p {
+        font-size: 13.5px;
+        color: var(--text2);
+        line-height: 1.6;
+      }
+
+      /* ── SECTION: PARA QUEM ── */
+      .for-who {
+        padding: 100px 0;
+      }
+      .for-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top: 52px;
+      }
+      .for-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 20px 22px;
+        transition: all 0.3s;
+      }
+      .for-item:hover {
+        border-color: rgba(0, 200, 255, 0.2);
+        background: rgba(0, 200, 255, 0.04);
+        transform: translateX(4px);
+      }
+      .for-check {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: rgba(0, 200, 255, 0.1);
+        border: 1px solid rgba(0, 200, 255, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 12px;
+        color: var(--blue);
+        margin-top: 1px;
+      }
+      .for-item p {
+        font-size: 14.5px;
+        color: var(--text);
+        line-height: 1.5;
+      }
+
+      /* ── SECTION: PLATAFORMA ── */
+      .platform {
+        padding: 100px 0;
+        background: var(--bg3);
+      }
+      .platform-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 52px;
+      }
+      .plat-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--r);
+        padding: 28px 24px;
+        text-align: center;
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+      .plat-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: var(--r);
+        background: var(--grad);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .plat-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(124, 58, 237, 0.3);
+      }
+      .plat-card:hover::after {
+        opacity: 0.05;
+      }
+      .plat-card > * {
+        position: relative;
+        z-index: 1;
+      }
+      .plat-icon {
+        font-size: 32px;
+        margin-bottom: 14px;
+        line-height: 1;
+      }
+      .plat-card h4 {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .plat-card p {
+        font-size: 13px;
+        color: var(--text2);
+        line-height: 1.6;
+      }
+
+      .plat-highlight {
+        grid-column: 1 / -1;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 200, 255, 0.07),
+          rgba(124, 58, 237, 0.09)
+        );
+        border: 1px solid rgba(0, 200, 255, 0.2);
+        border-radius: 18px;
+        padding: 32px 36px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        margin-top: 4px;
+      }
+      .plat-highlight-num {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-size: 64px;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -3px;
+        background: var(--grad);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        flex-shrink: 0;
+      }
+      .plat-highlight-text h4 {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 6px;
+        letter-spacing: -0.3px;
+      }
+      .plat-highlight-text p {
+        font-size: 14px;
+        color: var(--text2);
+        line-height: 1.65;
+      }
+
+      /* ── SECTION: OBJEÇÃO ── */
+      .objection {
+        padding: 100px 0;
+      }
+      .obj-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-top: 52px;
+      }
+      .obj-no {
+        background: rgba(239, 68, 68, 0.05);
+        border: 1px solid rgba(239, 68, 68, 0.15);
+        border-radius: var(--r);
+        padding: 28px;
+      }
+      .obj-yes {
+        background: rgba(0, 200, 255, 0.05);
+        border: 1px solid rgba(0, 200, 255, 0.15);
+        border-radius: var(--r);
+        padding: 28px;
+      }
+      .obj-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .obj-no .obj-label {
+        color: #f87171;
+      }
+      .obj-yes .obj-label {
+        color: var(--blue);
+      }
+      .obj-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .obj-list li {
+        font-size: 14.5px;
+        color: var(--text2);
+        line-height: 1.5;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .obj-no .obj-list li::before {
+        content: "✕";
+        color: #f87171;
+        font-size: 12px;
+        flex-shrink: 0;
+        margin-top: 3px;
+      }
+      .obj-yes .obj-list li::before {
+        content: "✓";
+        color: var(--blue);
+        font-size: 12px;
+        flex-shrink: 0;
+        margin-top: 3px;
+      }
+
+      .obj-quote {
+        text-align: center;
+        margin-top: 48px;
+        padding: 40px 32px;
+        background: var(--bg2);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        position: relative;
+        overflow: hidden;
+      }
+      .obj-quote::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          circle at 50% 0%,
+          rgba(124, 58, 237, 0.12),
+          transparent 70%
+        );
+      }
+      .obj-quote p {
+        font-family: "DM Serif Display", serif;
+        font-style: italic;
+        font-size: clamp(18px, 3vw, 24px);
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.55;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ── SECTION: OFERTA ── */
+      .offer {
+        padding: 100px 0;
+        background: var(--bg3);
+      }
+      .offer-box {
+        background: var(--bg2);
+        border: 1px solid rgba(124, 58, 237, 0.3);
+        border-radius: 22px;
+        padding: 52px 48px;
+        max-width: 640px;
+        margin: 52px auto 0;
+        position: relative;
+        overflow: hidden;
+      }
+      .offer-box::before {
+        content: "";
+        position: absolute;
+        top: -120px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 500px;
+        height: 400px;
+        background: radial-gradient(
+          ellipse,
+          rgba(124, 58, 237, 0.18),
+          transparent 65%
+        );
+        pointer-events: none;
+      }
+      .offer-box > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .offer-name {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text3);
+        margin-bottom: 6px;
+      }
+      .offer-title {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-size: clamp(26px, 4vw, 36px);
+        font-weight: 800;
+        letter-spacing: -1px;
+        margin-bottom: 28px;
+      }
+      .offer-title span {
+        background: var(--grad);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .offer-items {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 32px;
+      }
+      .offer-items li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 15px;
+        color: var(--text);
+      }
+      .offer-check {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: rgba(0, 200, 255, 0.1);
+        border: 1px solid rgba(0, 200, 255, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 11px;
+        color: var(--blue);
+      }
+
+      .offer-divider {
+        height: 1px;
+        background: var(--border);
+        margin: 28px 0;
+      }
+
+      .offer-price-note {
+        font-size: 14px;
+        color: var(--text2);
+        margin-bottom: 10px;
+      }
+      .offer-price {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-size: 68px;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -3px;
+        margin-bottom: 6px;
+      }
+      .offer-price sup {
+        font-size: 28px;
+        vertical-align: super;
+        letter-spacing: 0;
+      }
+      .offer-price-sub {
+        font-size: 14px;
+        color: var(--text3);
+        margin-bottom: 32px;
+      }
+
+      .btn-cta {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: var(--grad);
+        color: #fff;
+        border: none;
+        padding: 20px 32px;
+        border-radius: 12px;
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: -0.2px;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        box-shadow: 0 4px 40px rgba(124, 58, 237, 0.35);
+      }
+      .btn-cta:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 48px rgba(124, 58, 237, 0.55);
+      }
+      .btn-cta:active {
+        transform: translateY(-1px);
+      }
+
+      .guarantee {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 16px 18px;
+        margin-top: 16px;
+      }
+      .g-icon {
+        font-size: 28px;
+        flex-shrink: 0;
+      }
+      .guarantee p {
+        font-size: 13.5px;
+        color: var(--text2);
+        line-height: 1.5;
+      }
+      .guarantee strong {
+        color: var(--text);
+        font-weight: 500;
+      }
+
+      /* ── FOOTER ── */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 48px 0 36px;
+        position: relative;
+        z-index: 1;
+      }
+      .footer-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        text-align: center;
+      }
+      .footer-logo {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-weight: 800;
+        font-size: 22px;
+        letter-spacing: -0.5px;
+        background: var(--grad);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .footer-desc {
+        font-size: 13px;
+        color: var(--text3);
+        max-width: 340px;
+        line-height: 1.6;
+      }
+      .footer-legal {
+        font-size: 12px;
+        color: rgba(107, 127, 163, 0.5);
+        line-height: 1.6;
+        max-width: 500px;
+      }
+
+      /* ── REVEAL ANIMATIONS ── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .reveal-d1 {
+        transition-delay: 0.05s;
+      }
+      .reveal-d2 {
+        transition-delay: 0.12s;
+      }
+      .reveal-d3 {
+        transition-delay: 0.19s;
+      }
+      .reveal-d4 {
+        transition-delay: 0.26s;
+      }
+      .reveal-d5 {
+        transition-delay: 0.33s;
+      }
+      .reveal-d6 {
+        transition-delay: 0.4s;
+      }
+
+      /* ── HERO ENTRANCE ── */
+      .hero-tag {
+        animation: fadeUp 0.6s 0.1s both;
+      }
+      .hero h1 {
+        animation: fadeUp 0.6s 0.18s both;
+      }
+      .hero-sub-head {
+        animation: fadeUp 0.6s 0.25s both;
+      }
+      .hero-desc {
+        animation: fadeUp 0.6s 0.32s both;
+      }
+      .hero-pills {
+        animation: fadeUp 0.6s 0.39s both;
+      }
+      .hero-actions {
+        animation: fadeUp 0.6s 0.46s both;
+      }
+      .hero-note {
+        animation: fadeUp 0.6s 0.53s both;
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* ── PULSE BTN ── */
+      .btn-pulse {
+        animation: btnPulse 2.5s ease infinite;
+      }
+      @keyframes btnPulse {
+        0%,
+        100% {
+          box-shadow: 0 4px 40px rgba(124, 58, 237, 0.35);
+        }
+        50% {
+          box-shadow:
+            0 4px 60px rgba(124, 58, 237, 0.6),
+            0 0 0 8px rgba(124, 58, 237, 0.08);
+        }
+      }
+
+      /* ── RESPONSIVE ── */
+      @media (max-width: 768px) {
+        .problem-grid,
+        .for-grid,
+        .obj-grid {
+          grid-template-columns: 1fr;
+        }
+        .platform-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .steps-grid {
+          grid-template-columns: 1fr 1fr;
+          gap: 32px;
+        }
+        .steps-grid::before {
+          display: none;
+        }
+        .plat-highlight {
+          flex-direction: column;
+          text-align: center;
+          gap: 12px;
+        }
+        .offer-box {
+          padding: 36px 24px;
+        }
+        .offer-price {
+          font-size: 52px;
+        }
+        nav .nav-badge {
+          display: none;
+        }
+      }
+      @media (max-width: 480px) {
+        .platform-grid {
+          grid-template-columns: 1fr;
+        }
+        .steps-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero {
+          padding: 120px 0 80px;
+        }
+        .offer-price {
+          font-size: 44px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glow-layer"></div>
+
+    <!-- NAV -->
+    <nav>
+      <div class="wrap nav-inner">
+        <a href="#" class="nav-logo">Nexus™</a>
+        <span class="nav-badge">Radar de Oportunidades</span>
+        <button class="nav-cta" onclick="location.href = 'quiz.html'">
+          Começar agora
+        </button>
+      </div>
+    </nav>
+
+    <!-- ══ HERO ══ -->
+    <section class="hero" id="inicio">
+      <div class="wrap">
+        <div class="hero-tag">
+          <span class="tag-dot"></span>
+          Mais de 50 oportunidades organizadas
+        </div>
+
+        <h1>
+          Você não precisa de mais<br />uma oportunidade.<br /><em
+            >Você precisa da certa.</em
+          >
+        </h1>
+
+        <p class="hero-sub-head">
+          Descubra formas de renda extra compatíveis com sua realidade..
+        </p>
+
+        <p class="hero-desc">
+          Sem promessas milagrosas. Sem precisar largar seu trabalho. Sem
+          precisar ter experiência prévia.
+        </p>
+
+        <div class="hero-pills">
+          <span class="hero-pill">Funciona pelo celular</span>
+          <span class="hero-pill">Sem experiência necessária</span>
+          <span class="hero-pill">Sem largar o emprego</span>
+          <span class="hero-pill">Sem promessas falsas</span>
+        </div>
+
+        <div
+          class="hero-actions"
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+          "
+        >
+          <button
+            class="btn-main btn-pulse"
+            onclick="location.href = 'quiz.html'"
+          >
+            🎯 DESCOBRIR MINHAS MELHORES OPORTUNIDADES
+          </button>
+          <p class="hero-note">
+            Descubra gratuitamente qual caminho faz sentido para você antes de
+            decidir.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══ PROBLEMA ══ -->
+    <section class="problem">
+      <div class="wrap">
+        <div class="text-center reveal">
+          <span class="s-label">O problema real</span>
+          <h2 class="s-title">
+            Não falta oportunidade.<br />Falta <em>direção.</em>
+          </h2>
+          <p class="s-sub">
+            A internet está cheia de possibilidades. Mas quanto mais você
+            pesquisa, mais confuso fica. Você já viu — ou tentou — alguma
+            dessas?
+          </p>
+        </div>
+
+        <div class="problem-grid" style="margin-top: 48px">
+          <div class="p-card reveal reveal-d1">
+            <div class="p-card-icon">🤯</div>
+            <h4>Excesso de informação</h4>
+            <p>
+              São dezenas de "gurus", centenas de estratégias e milhares de
+              vídeos. Cada um dizendo que o método dele é o melhor.
+            </p>
+          </div>
+          <div class="p-card reveal reveal-d2">
+            <div class="p-card-icon">🎯</div>
+            <h4>Falta de perfil</h4>
+            <p>
+              Afiliados, Shopee, IA, Freelancer, Social Media... cada um exige
+              habilidades e tempo diferentes. O que é certo para você?
+            </p>
+          </div>
+          <div class="p-card reveal reveal-d3">
+            <div class="p-card-icon">💸</div>
+            <h4>Tentativas sem resultado</h4>
+            <p>
+              Você começa um caminho, investe tempo e energia, não vê resultado
+              rápido — e desiste. O ciclo se repete.
+            </p>
+          </div>
+          <div class="p-card reveal reveal-d4">
+            <div class="p-card-icon">😔</div>
+            <h4>Promessas que cansam</h4>
+            <p>
+              "Fiz R$10 mil no primeiro mês." "Resultado em 7 dias." Você sabe
+              que não é assim. E está cansado de mentiras.
+            </p>
+          </div>
+        </div>
+
+        <div class="prob-statement reveal">
+          <p>
+            O problema <strong>não é você</strong>. O problema é tentar um
+            caminho que não foi feito para o seu perfil, momento de vida e
+            realidade atual.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══ COMO FUNCIONA ══ -->
+    <section class="how" id="como-funciona">
+      <div class="wrap">
+        <div class="text-center reveal">
+          <span class="s-label">Como funciona</span>
+          <h2 class="s-title">Simples. Direto.<br /><em>Sem enrolação.</em></h2>
+          <p class="s-sub">
+            O Nexus usa um diagnóstico para entender seu perfil e mostrar as
+            oportunidades mais compatíveis com você.
+          </p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-item reveal reveal-d1">
+            <div class="step-num">01</div>
+            <h4>Responda o diagnóstico</h4>
+            <p>
+              Perguntas simples sobre seu tempo disponível, habilidades e
+              objetivos atuais.
+            </p>
+          </div>
+          <div class="step-item reveal reveal-d2">
+            <div class="step-num">02</div>
+            <h4>Receba a análise</h4>
+            <p>
+              O sistema identifica quais caminhos são mais compatíveis com o seu
+              perfil real.
+            </p>
+          </div>
+          <div class="step-item reveal reveal-d3">
+            <div class="step-num">03</div>
+            <h4>Descubra oportunidades</h4>
+            <p>
+              Veja as oportunidades que fazem sentido para você — sem ruído, sem
+              distração.
+            </p>
+          </div>
+          <div class="step-item reveal reveal-d4">
+            <div class="step-num">04</div>
+            <h4>Acesse a plataforma</h4>
+            <p>
+              Entre na biblioteca organizada com tudo que você precisa para
+              começar com clareza.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══ PARA QUEM ══ -->
+    <section class="for-who">
+      <div class="wrap">
+        <div class="text-center reveal">
+          <span class="s-label">Para quem é</span>
+          <h2 class="s-title">
+            O Nexus foi feito<br />para <em>pessoas reais.</em>
+          </h2>
+          <p class="s-sub">
+            Não para quem já tem capital, experiência ou tempo sobrando. Para
+            quem está começando do zero.
+          </p>
+        </div>
+
+        <div class="for-grid">
+          <div class="for-item reveal reveal-d1">
+            <div class="for-check">✓</div>
+            <p>Quem precisa de renda extra sem abrir mão do emprego atual</p>
+          </div>
+          <div class="for-item reveal reveal-d2">
+            <div class="for-check">✓</div>
+            <p>
+              Quem quer aumentar a renda mensal usando só o celular e internet
+            </p>
+          </div>
+          <div class="for-item reveal reveal-d3">
+            <div class="for-check">✓</div>
+            <p>Quem está cansado de depender apenas do salário no fim do mês</p>
+          </div>
+          <div class="for-item reveal reveal-d4">
+            <div class="for-check">✓</div>
+            <p>
+              Quem busca mais liberdade financeira com passos concretos e reais
+            </p>
+          </div>
+          <div class="for-item reveal reveal-d5">
+            <div class="for-check">✓</div>
+            <p>
+              Quem está perdido sem saber por onde começar e precisa de direção
+            </p>
+          </div>
+          <div class="for-item reveal reveal-d6">
+            <div class="for-check">✓</div>
+            <p>
+              Quem quer criar uma segunda fonte de renda sem promessas falsas
+            </p>
+          </div>
+          <div class="for-item reveal">
+            <div class="for-check">✓</div>
+            <p>
+              Quem já tentou antes e não conseguiu — e quer entender o porquê
+            </p>
+          </div>
+          <div class="for-item reveal reveal-d1">
+            <div class="for-check">✓</div>
+            <p>
+              Quem está cansado das promessas de enriquecimento fácil da
+              internet
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══ PLATAFORMA ══ -->
+    <section class="platform" id="plataforma">
+      <div class="wrap">
+        <div class="text-center reveal">
+          <span class="s-label">O que você acessa</span>
+          <h2 class="s-title">
+            Tudo organizado.<br />Tudo <em>relevante para você.</em>
+          </h2>
+          <p class="s-sub">
+            Nada de informação solta ou lista aleatória. Cada recurso foi
+            pensado para quem está começando do zero.
+          </p>
+        </div>
+
+        <div class="platform-grid">
+          <div class="plat-card reveal reveal-d1">
+            <div class="plat-icon">🗺️</div>
+            <h4>Mapa do Iniciante</h4>
+            <p>
+              O ponto de partida para quem não sabe por onde começar. Visão
+              clara do caminho.
+            </p>
+          </div>
+          <div class="plat-card reveal reveal-d2">
+            <div class="plat-icon">💻</div>
+            <h4>Oportunidades Digitais</h4>
+            <p>
+              Caminhos que funcionam 100% online, com celular ou computador, sem
+              sair de casa.
+            </p>
+          </div>
+          <div class="plat-card reveal reveal-d3">
+            <div class="plat-icon">💰</div>
+            <h4>Baixo Investimento</h4>
+            <p>
+              Oportunidades que você pode iniciar sem precisar de capital
+              inicial relevante.
+            </p>
+          </div>
+          <div class="plat-card reveal reveal-d4">
+            <div class="plat-icon">📈</div>
+            <h4>Oportunidades Escaláveis</h4>
+            <p>
+              Caminhos que crescem com o tempo — o esforço de hoje gera
+              resultado amanhã.
+            </p>
+          </div>
+          <div class="plat-card reveal reveal-d5">
+            <div class="plat-icon">📚</div>
+            <h4>Biblioteca Premium</h4>
+            <p>
+              Materiais, guias e referências curados. Só o que realmente importa
+              para você agir.
+            </p>
+          </div>
+          <div class="plat-card reveal reveal-d6">
+            <div class="plat-icon">🔄</div>
+            <h4>Atualizações Futuras</h4>
+            <p>
+              Novas oportunidades e conteúdos são adicionados continuamente sem
+              custo extra.
+            </p>
+          </div>
+        </div>
+
+        <div class="plat-highlight reveal" style="margin-top: 20px">
+          <div class="plat-highlight-num">50+</div>
+          <div class="plat-highlight-text">
+            <h4>Oportunidades organizadas em um só lugar</h4>
+            <p>
+              Não é uma lista genérica. Cada oportunidade foi mapeada,
+              categorizada e descrita para que você entenda o que é, como
+              funciona, quanto pode gerar e qual perfil se adapta melhor.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══ OBJEÇÃO ══ -->
+    <section class="objection">
+      <div class="wrap">
+        <div class="text-center reveal">
+          <span class="s-label">Transparência total</span>
+          <h2 class="s-title">
+            O Nexus <em>não promete</em><br />o que não pode entregar.
+          </h2>
+          <p class="s-sub">
+            Antes de você decidir, você precisa saber exatamente o que isto é e
+            o que não é.
+          </p>
+        </div>
+
+        <div class="obj-grid">
+          <div class="obj-no reveal reveal-d1">
+            <div class="obj-label">❌ Nexus NÃO é</div>
+            <ul class="obj-list">
+              <li>Promessa de riqueza rápida ou dinheiro fácil</li>
+              <li>Fórmula mágica que funciona para todo mundo</li>
+              <li>Resultados automáticos sem esforço</li>
+              <li>Mais um curso genérico de marketing digital</li>
+              <li>Esquema que substitui seu trabalho do dia para a noite</li>
+            </ul>
+          </div>
+          <div class="obj-yes reveal reveal-d2">
+            <div class="obj-label">✅ Nexus É</div>
+            <ul class="obj-list">
+              <li>Um sistema de diagnóstico e direção personalizado</li>
+              <li>Mapa claro de oportunidades reais organizadas por perfil</li>
+              <li>Ponto de partida concreto para quem está perdido</li>
+              <li>
+                Clareza sobre o que existe e o que pode funcionar para você
+              </li>
+              <li>Apoio para quem quer começar de forma séria e realista</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="obj-quote reveal">
+          <p>
+            "Finalmente encontrei algo que faz sentido para a minha
+            realidade."<br />
+            <span
+              style="
+                font-style: normal;
+                font-family: &quot;DM Sans&quot;, sans-serif;
+                font-size: 14px;
+                color: rgba(255, 255, 255, 0.35);
+                display: block;
+                margin-top: 12px;
+              "
+              >— O que queremos que você sinta depois de acessar o Nexus</span
+            >
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ══ OFERTA ══ -->
+    <section class="offer" id="oferta">
+      <div class="wrap">
+        <div class="text-center reveal">
+          <span class="s-label">Oferta</span>
+          <h2 class="s-title">Acesso completo ao<br /><em>Nexus™ Radar</em></h2>
+          <p class="s-sub">
+            Tudo que você precisa para parar de se perder e começar a tomar
+            decisões com clareza.
+          </p>
+        </div>
+
+        <div class="offer-box reveal">
+          <div class="offer-name">Nexus™</div>
+          <div class="offer-title">Radar de <span>Oportunidades</span></div>
+
+          <ul class="offer-items">
+            <li>
+              <span class="offer-check">✓</span> Diagnóstico personalizado de
+              perfil
+            </li>
+            <li>
+              <span class="offer-check">✓</span> Mais de 50 oportunidades
+              organizadas
+            </li>
+            <li><span class="offer-check">✓</span> Mapa do Iniciante</li>
+            <li>
+              <span class="offer-check">✓</span> Oportunidades Digitais e
+              Escaláveis
+            </li>
+            <li><span class="offer-check">✓</span> Biblioteca Premium</li>
+            <li>
+              <span class="offer-check">✓</span> Atualizações futuras incluídas
+            </li>
+          </ul>
+
+          <div class="offer-divider"></div>
+
+          <div class="offer-price-note"></div>
+          <div class="offer-price"><sup></sup></div>
+          <div class="offer-price-sub">
+            Descubra quais oportunidades possuem maior compatibilidade com sua
+            realidade atual.
+          </div>
+
+          <button
+            class="btn-main btn-pulse"
+            onclick="location.href = 'quiz.html'"
+          >
+            🎯 DESCOBRIR MINHAS MELHORES OPORTUNIDADES
+          </button>
+
+          <div class="guarantee">
+            <div class="g-icon">🛡️</div>
+            <div>
+              <p>
+                <strong>Garantia de 7 dias sem risco.</strong> Explore a
+                plataforma completa. Se não fizer sentido para você, devolvemos
+                100% do valor. Sem perguntas, sem burocracia.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ FOOTER ══ -->
+    <footer>
+      <div class="wrap">
+        <div class="footer-inner">
+          <div class="footer-logo">Nexus™</div>
+          <p class="footer-desc">
+            Radar de Oportunidades — sistema de diagnóstico e direção para quem
+            quer criar uma segunda fonte de renda.
+          </p>
+          <p class="footer-legal">
+            Os resultados variam de acordo com o perfil, dedicação e contexto de
+            cada pessoa.<br />
+            O Nexus não garante resultados financeiros específicos.<br />
+            © 2025 Nexus™. Todos os direitos reservados.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Scroll reveal
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              observer.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+
+      // Smooth scroll for anchors
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener("click", (e) => {
+          const target = document.querySelector(a.getAttribute("href"));
+          if (target) {
+            e.preventDefault();
+            const offset =
+              target.getBoundingClientRect().top + window.scrollY - 72;
+            window.scrollTo({ top: offset, behavior: "smooth" });
+          }
+        });
+      });
+
+      // Nav shadow on scroll
+      const nav = document.querySelector("nav");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 20) {
+          nav.style.boxShadow = "0 2px 40px rgba(0,0,0,.4)";
+        } else {
+          nav.style.boxShadow = "none";
+        }
+      });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase.js"></script>
+<script src="../js/protect.js"></script>
+  </body>
+</html>

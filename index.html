@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nexus | Meu Mapa</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="logo">N</div>
+          <span>Nexus</span>
+        </div>
+
+          <nav class="menu">
+            <a class="menu-link active" href="index.html">🧭 Meu Mapa</a>
+            <a class="menu-link" href="pages/bonus.html">🎁 Bônus Premium</a>
+            <a href="#" class="logout-btn" onclick="logout()">🚪 Sair</a>
+          </nav>
+        </nav>
+
+        <div class="plan-card">
+          <strong>Plano Pro</strong>
+          <p>Acesso completo ao seu mapa e bônus.</p>
+          <button>Gerenciar</button>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <span class="eyebrow">MAPA PERSONALIZADO</span>
+            <h1>Seu mapa de oportunidades</h1>
+            <p>Veja ideias compatíveis com seu perfil, rotina e recursos.</p>
+          </div>
+
+          <a href="pages/bonus.html" class="bonus-btn"> 🎁 Ver bônus </a>
+        </header>
+
+        <section class="hero">
+          <div>
+            <h2>Encontre o melhor caminho para gerar renda.</h2>
+            <p>
+              Filtre oportunidades por tipo de trabalho e descubra quais
+              combinam mais com você.
+            </p>
+          </div>
+
+          <div class="hero-stats">
+            <div>
+              <strong>48</strong>
+              <span>oportunidades</span>
+            </div>
+            <div>
+              <strong>92%</strong>
+              <span>maior compatibilidade</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="filters">
+          <button class="active">Todas</button>
+          <button>Digital</button>
+          <button>Em casa</button>
+          <button>Renda extra</button>
+          <button>Baixo investimento</button>
+          <button>Escalável</button>
+        </section>
+        <article class="opportunity-card">
+          <div class="card-top">
+            <span>📍 Mapa do iniciante - Seus primeiros passos</span>
+            <strong>88%</strong>
+          </div>
+          <h3>Mapa do iniciante</h3>
+          <p>
+            Oportunidades práticas para gerar dinheiro adicional de forma rápida
+            e acessível.
+          </p>
+          <a href="pages/rota.html" class="card-btn">
+            ver o mapa
+          </a>
+        </article>
+
+        <section class="cards">
+          <article class="opportunity-card">
+            <div class="card-top">
+              <span>💻 Digital</span>
+              <strong>92%</strong>
+            </div>
+            <h3>Digital</h3>
+            <p>
+              Oportunidades online que podem ser feitas usando apenas celular ou
+              computador. .
+            </p>
+            <a href="categorias/digital.html" class="card-btn">
+              Ver oportunidade
+            </a>
+          </article>
+
+          <article class="opportunity-card">
+            <div class="card-top">
+              <span>🏠 Em casa</span>
+              <strong>84%</strong>
+            </div>
+            <h3>Em casa</h3>
+            <p>
+              Formas de gerar renda sem precisar sair de casa ou ter estrutura
+              física.
+            </p>
+            <a href="categorias/em-casa.html" class="card-btn">
+              Ver oportunidade
+            </a>
+          </article>
+
+          <article class="opportunity-card">
+            <div class="card-top">
+              <span>Baixo investimento</span>
+              <strong>90%</strong>
+            </div>
+            <h3>Baixo investimento</h3>
+            <p>
+              Ideias que exigem pouco ou quase nenhum dinheiro para começar.
+            </p>
+            <a href="categorias/baixo-investimento.html" class="card-btn">
+              Ver oportunidade
+            </a>
+          </article>
+
+          <article class="opportunity-card">
+            <div class="card-top">
+              <span>Escalável</span>
+              <strong>90%</strong>
+            </div>
+            <h3>Escalável</h3>
+            <p>
+              Modelos que possuem potencial de crescimento e aumento de renda
+              com o tempo.
+            </p>
+            <a href="categorias/escalavel.html" class="card-btn">
+              Ver oportunidade
+            </a>
+          </article>
+        </section>
+      </main>
+    </div>
+    <script src="../script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./js/supabase.js"></script>
+<script src="./js/protect.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="./js/supabase.js"></script>
+<script src="./js/protect.js"></script>
+<script src="./js/auth.js"></script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Criar Acesso | Nexus</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+
+  <body>
+    <main class="login-wave-page">
+      <div class="login-wave-bg"></div>
+
+      <section class="login-wave-card">
+        <span class="login-logo">NEXUS™</span>
+
+        <h1>Criar acesso</h1>
+
+        <form id="signupForm">
+          <input
+            id="signupEmail"
+            type="email"
+            placeholder="Seu e-mail"
+            required
+          />
+          <input
+            id="signupPassword"
+            type="password"
+            placeholder="Crie uma senha"
+            required
+          />
+          <button type="submit">Criar Meu Acesso</button>
+        </form>
+
+        <p id="signupMessage"></p>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+    <script src="../js/auth.js"></script>
+    
+  </body>
+</html>
