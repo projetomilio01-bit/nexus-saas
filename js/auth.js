@@ -92,3 +92,56 @@ async function logout() {
   await supabaseClient.auth.signOut();
   window.location.href = "/pages/logm.html";
 }
+const forgotPasswordLink = document.getElementById("forgotPasswordLink");
+
+if (forgotPasswordLink) {
+  forgotPasswordLink.addEventListener("click", async function (event) {
+    event.preventDefault();
+
+    const email = document.getElementById("email").value;
+
+    if (!email) {
+      authMessage.textContent = "Digite seu e-mail primeiro.";
+      return;
+    }
+
+    const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+      redirectTo:
+        "https://vocal-sawine-912e60.netlify.app/pages/redefinir-senha.html",
+    });
+
+    if (error) {
+      authMessage.textContent = error.message;
+      return;
+    }
+
+    authMessage.textContent =
+      "Enviamos um link de recuperação para seu e-mail.";
+  });
+}
+
+const resetForm = document.getElementById("resetForm");
+const resetMessage = document.getElementById("resetMessage");
+
+if (resetForm) {
+  resetForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const newPassword = document.getElementById("newPassword").value;
+
+    const { error } = await supabaseClient.auth.updateUser({
+      password: newPassword,
+    });
+
+    if (error) {
+      resetMessage.textContent = error.message;
+      return;
+    }
+
+    resetMessage.textContent = "Senha atualizada com sucesso!";
+
+    setTimeout(function () {
+      window.location.href = "./logm.html";
+    }, 1500);
+  });
+}

@@ -3271,7 +3271,7 @@ h1 {
   border-radius: 12px;
 
   background: rgba(15, 23, 42, 0.75);
-  border: 1px solid rgba(56, 189, 248, 0.20);
+  border: 1px solid rgba(56, 189, 248, 0.2);
 
   color: white;
   text-decoration: none;
@@ -3305,7 +3305,7 @@ h1 {
 
   z-index: 99999;
 
-  transition: all .2s ease;
+  transition: all 0.2s ease;
 }
 
 .rota-logout-btn:hover {
@@ -3314,4 +3314,26 @@ h1 {
   background: rgba(30, 41, 59, 0.95);
 
   border-color: rgba(56, 189, 248, 0.45);
+}
+#forgotPasswordLink {
+  display: block;
+  margin-top: 16px;
+  text-align: center;
+  color: #20c4ff;
+  font-size: 14px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+#forgotPasswordLink:hover {
+  color: #7c5cff;
+  text-decoration: underline;
+}
+
+#authMessage {
+  text-align: center;
+  margin-top: 10px;
+  color: #ffb347;
+  font-size: 14px;
 }
